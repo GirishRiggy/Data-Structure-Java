@@ -131,8 +131,8 @@ public class BinarySearchTree implements DSFunctions
 		System.out.println("Find element");
 		tree.search(tree.root, 88);
 		
-		//System.out.println("Delete element");
-		//tree.delete(tree.root, 88);
+		System.out.println("Delete element");
+		tree.delete(tree.root, 88);
 		
 		System.out.println("Find element");
 		tree.search(tree.root, 88);
