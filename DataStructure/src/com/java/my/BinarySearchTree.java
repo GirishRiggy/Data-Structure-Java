@@ -1,7 +1,7 @@
 package com.java.my;
 import com.java.my.Node;
 
-public class BinarySearchTree 
+public class BinarySearchTree implements DSFunctions
 {
 	Node root;
 	public void insert(int key){
@@ -71,6 +71,43 @@ public class BinarySearchTree
 		
 	}
 	
+	public void delete(Node root, int key){
+		root = DeleteNode(root, key);
+	}
+	
+	public Node DeleteNode(Node root,int key){
+		
+		if(root == null){
+			return root;
+		}
+		if(key < root.key){
+			root.leftchild = DeleteNode(root.leftchild, key);
+		} else if(key> root.key){
+			root.rightchild = DeleteNode(root.rightchild, key);
+		} else {
+				if(root.leftchild == null){
+					return root.rightchild;
+				} else if(root.rightchild == null){
+					return root.leftchild;
+				}
+				
+				root.key = minValue(root.rightchild);
+				
+				root.rightchild = DeleteNode(root.rightchild, root.key);
+		}
+		
+		return root;
+	}
+	
+	public int minValue(Node root){ 
+		int keyValue = root.key;
+		while(root.leftchild != null) {
+				root.key = root.leftchild.key;
+				root = root.leftchild;
+		}
+		return keyValue;
+	}
+	
 	public static void main(String[] args) {
 		
 		BinarySearchTree tree = new BinarySearchTree();
@@ -92,6 +129,18 @@ public class BinarySearchTree
 		tree.postorderTraversals(tree.root);
 		
 		System.out.println("Find element");
-		tree.search(tree.root, 8009);
+		tree.search(tree.root, 88);
+		
+		//System.out.println("Delete element");
+		//tree.delete(tree.root, 88);
+		
+		System.out.println("Find element");
+		tree.search(tree.root, 88);
+		
+		System.out.println("In-order traversals");
+		tree.inorderTraversals(tree.root);
 	}
+
+
+
 }
